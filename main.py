@@ -1,3 +1,6 @@
-print("input chocolate's height , width : ")
-n, m = map(int, input().split())
-print(n-1+(m-1)*n)
+count = int(input())
+
+for i in range(0, count):
+  a,b = map(int,input().split(" "))
+  print(f"Case #{i+1}: {a+b}")
+  
