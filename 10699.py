@@ -1,4 +1,5 @@
-import datetime
+hour, minute = map(int,input().split())
+ovendelay = int(input())
 
-nowday = str(datetime.datetime.today()).split()[0]
-print(nowday)
+totaltime = minute + ovendelay
+print(totaltime / 60 , totaltime%60)
