@@ -1,3 +1,3 @@
-price, count, pay = map(int,input().split())
-result = (price*count) - pay
-print(result if result >= 0 else 0)
+A, B = map(int,input().split())
+
+print(A+B)
