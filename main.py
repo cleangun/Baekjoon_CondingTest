@@ -1,30 +1,40 @@
 from collections import deque
 
-graph_list = {1: set([3,4]),
-              2: set([3,4,5]),
-              3: set([1,5]),
-              4: set([1]),
-              5: set([2,6]),
-              6: set([3,5])
-             
-             }
-root_node = 1
-
-print(graph_list)
-
-def BFS_with_adj_list(graph,root):
+# BFS 구현 -- 미완성
+def BFS_mootube(graph, root, K):
+  count = 0
   visited = []
   queue = deque([root])
 
   while queue:
-    print("queue = ", queue)
-    n = queue.popleft() # 왼쪽을 빼옴
-    print("n = ", n)
-    if n not in visited: # 방문한 적이 없으면 조건문 방문
-      visited.append(n)  # 방문명록 추가
-      queue += graph[n] - set(visited) # 방문한 놈들 빼고, 
-                                       # 방문할 놈들 추가
-      print(f"graph[{n}] = {graph[n]} , set(visited : {set(visited)})")
-  return visited
+    node = queue.popleft()
+    if node not in visited:
+      visited.append(node)
+      for index in range(len(graph[node])):
+        queue += list(set(graph[node][index]) - set(visited))
+        if graph[node][index][1] >= K and graph[node][index][0] not in visited:
+          count += 1
+  return count
+    
 
-print(BFS_with_adj_list(graph_list, root_node))
+# main 
+N, Q = map(int, input().split())
+graph = dict()
+
+for i in range(1, N+1):
+  graph[i] = []
+
+for _ in range(N-1):
+  a, b, usado = map(int,input().split())
+  graph[a].append([b, usado])
+  graph[b].append([a, usado])
+
+print(graph)
+
+for _ in range(Q):
+  K, node = map(int, input().split())
+  print(BFS_mootube(graph,node, K))
+
+
+
+
