@@ -1,40 +1,37 @@
 from collections import deque
+import sys
+input = sys.stdin.readline
 
-# BFS 구현 -- 미완성
-def BFS_mootube(graph, root, K):
-  count = 0
-  visited = []
-  queue = deque([root])
+n, q = map(int, input().split())
+graph = [ [] for _ in range(n+1)]
 
-  while queue:
-    node = queue.popleft()
-    if node not in visited:
-      visited.append(node)
-      for index in range(len(graph[node])):
-        queue += list(set(graph[node][index]) - set(visited))
-        if graph[node][index][1] >= K and graph[node][index][0] not in visited:
-          count += 1
-  return count
-    
-
-# main 
-N, Q = map(int, input().split())
-graph = dict()
-
-for i in range(1, N+1):
-  graph[i] = []
-
-for _ in range(N-1):
-  a, b, usado = map(int,input().split())
-  graph[a].append([b, usado])
-  graph[b].append([a, usado])
+for _ in range(n - 1):
+  a, b, usado = (map(int,input().split()))
+  graph[a].append((b,usado))
+  graph[b].append((a, usado))
 
 print(graph)
 
-for _ in range(Q):
-  K, node = map(int, input().split())
-  print(BFS_mootube(graph,node, K))
+for i in range(q):
+  k , v = map(int, input().split())
+  visited = [False] * (n + 1)
+  visited[v] = True
+  result = 0
+  q = deque([(v, float('inf'))])
 
+  while q:
+    v, usado = q.pop()
+    for next_v, next_usado in graph[v]:
 
-
-
+      print(f"Queue = {q}")
+      print(f"v = {v} / next_v = {next_v}")
+      print(f"next_usado = {next_usado} / usado = {usado}")
+      
+      next_usado = min(usado, next_usado)
+      if next_usado >= k and not visited[next_v]:
+        print(f"Count up!")
+        print()
+        result += 1
+        q.append((next_v , next_usado))
+        visited[next_v] = True
+  print(result)
