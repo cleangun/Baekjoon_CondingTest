@@ -1,9 +1,8 @@
-p, q = map(int, input().split())
-measureList = []
-for i in range(1, p+1):
-  if p % i == 0:
-    measureList.append(i)
-if not len(measureList) <= q-1:
-  print(measureList[q-1])
-else:
-  print(0)
+p_sum = 0
+max = 0
+for _ in range(10):
+  ppout, ppin = map(int, input().split())
+  p_sum += ppin - ppout
+  if p_sum > max:
+    max = p_sum
+print(max)
