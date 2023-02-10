@@ -3,7 +3,6 @@ import sys
 dmc_list = []
 M = int(sys.stdin.readline())
 N = int(sys.stdin.readline())
-dmc_sum = 0
 
 def chk_demical(num):  #소수인지 확인
   if num == 2:
@@ -17,15 +16,13 @@ def chk_demical(num):  #소수인지 확인
     return True
 
 for chk_num in range(M,N+1):
-  if chk_demical(chk_num)
+  if chk_demical(chk_num):
     dmc_list.append(chk_num)
 
-for list_num in dmc_list:
-  dmc_sum += list_num
 
 if len(dmc_list) == 0:
   print(-1)
 else:
-  print(dmc_sum)
+  print(sum(dmc_list))
   print(min(dmc_list))
   
