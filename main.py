@@ -1,40 +1,33 @@
-import sys
+s = list(input())
+stack = []
+ans = 0
+tmp = 1
 
-line = int(input())
+for i in range(len(s)):
+  if s[i] == '(':
+    tmp *= 2
+    stack.append(s[i])
+  elif s[i] == '[':
+    tmp *= 3
+    stack.append(s[i])
+  elif s[i] == ')':
+    if not stack or stack[-1] == '[':
+      ans = 0
+      break
+    elif s[i-1] == '(':
+      ans += tmp
+    stack.pop()
+    tmp //= 2
+  elif s[i] == ']':
+    if not stack or stack[-1] == '(':
+      ans = 0
+      break
+    elif s[i-1] == '[':
+      ans += tmp
+    stack.pop()
+    tmp //= 3
 
-def chk_correct(str):
-  stack = []
-  for i in str:
-    if i == ')':
-      if len(stack) != 0:
-        node = stack.pop()
-        if node == '(':
-          continue
-        else:
-          return "NO"
-      else:
-        return "NO"    
-      
-    elif i == ']':
-      if len(stack) != 0:
-        node = stack.pop()
-        if node == '[':
-          continue
-        else:
-          return "NO"
-      else:
-        return "NO"
-    else:
-      stack.append(i)
-  if len(stack) == 0:
-    return 'YES'
-  else:
-    return 'NO'
-
-
-for _ in range(line):
-  str = sys.stdin.readline().rstrip()
-  print(chk_correct(str))
-  
-      
-      
+if stack:
+  print(0)
+else:
+  print(ans)
