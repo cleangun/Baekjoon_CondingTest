@@ -35,6 +35,3 @@ def chk_correct(str):
 for _ in range(line):
   str = sys.stdin.readline().rstrip()
   print(chk_correct(str))
-  
-      
-      
