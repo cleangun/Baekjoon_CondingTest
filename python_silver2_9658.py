@@ -16,7 +16,7 @@ for i in range(9, N+1):
   else:
     arr[i] = 'SK'
 
-# for i in range(1,N+1):
-#   print(f"{i} = {arr[i]}")
+for i in range(1,100):
+  print(arr[i])
 
 print(arr[N])
