@@ -19,5 +19,3 @@ while n >= 1:
     print(f"{cnt} {student[int(stack.pop()) - 1]}")
   else:
     break
-
-    
