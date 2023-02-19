@@ -1,23 +1,41 @@
 import sys
 
-n = 1
-cnt = 0
-while n >= 1:
-  n = int(sys.stdin.readline())
-  if n >= 1:
-    cnt += 1
-    student = []
-    stack = []
-    for _ in range(n): # 학생들 이름 받기
-      student.append(sys.stdin.readline().rstrip())
-    for _ in range((2*n) - 1):
-      num, alpha = sys.stdin.readline().split()
-      if num in stack:
-        stack.remove(num)
-      else:
-        stack.append(num)
-    print(f"{cnt} {student[int(stack.pop()) - 1]}")
-  else:
-    break
+def merge_sort(array):
+  if len(array) < 2:
+    return list(array)
+  print(len(array), end=' ')
+  print(f"array : {array}")
+  mid = len(array) // 2
+  print(f"mid = {mid}")
+  print()
+  low_arr = merge_sort(array[:mid])
+  high_arr = merge_sort(array[mid:])
 
-    
+  merged_arr = []
+
+  l = h = 0
+  while l < len(low_arr) and h < len(high_arr):
+    if len(low_arr[l]) < len(high_arr[h]):
+      merged_arr.append(low_arr[h])
+      l += 1
+    elif len(low_arr[l]) > len(high_arr[h]):
+      merged_arr.append(high_arr[h])
+      h += 1
+    else:
+      merged_arr.append(low_arr[h])
+      merged_arr.append(high_arr[h])
+      l += 1
+      h += 1
+      
+  merged_arr += low_arr[l:]
+  merged_arr += high_arr[h:]
+  print(merged_arr)
+  return merged_arr
+
+stack = []
+n = int(sys.stdin.readline())
+for _ in range(n):
+  stack.append(sys.stdin.readline().rstrip())
+
+print(f"didnt merged : {stack}")
+print(merge_sort(stack))
