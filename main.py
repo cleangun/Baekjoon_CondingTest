@@ -1,82 +1,51 @@
 import sys
 
+# function
+def merge_sort(arr):
+  if len(arr) < 2:
+    return arr
 
-def merge_sort(array):
-  if len(array) < 2:
-    return array
-  mid = len(array) // 2
-
-  low_arr = merge_sort(array[:mid])
-  high_arr = merge_sort(array[mid:])
-
-  print("-----------------")
-  print(f"low_arr = {low_arr}")
-  print(f"high_arr = {high_arr}")
-  print()
+  mid = len(arr) // 2
+  # print(f"mid = {mid}")
+  low_arr = merge_sort(arr[:mid])
+  high_arr = merge_sort(arr[mid:])
 
   merged_arr = []
-
   l = h = 0
-  cnt = 0
   while l < len(low_arr) and h < len(high_arr):
-    cnt += 1
-    print(f" while cnt = {cnt}")
-    print(f" Array = {array}")
-    print(f"compare index = {low_arr[l]}({len(low_arr[l])}) / {high_arr[h]}({len(high_arr[h])})")
     if len(low_arr[l]) < len(high_arr[h]):
-      merged_arr.append(low_arr[h])
-      print(f"....low_arr append....")
-      print(f"l = {l}")
-      print(f"h = {h}")
-      print(f"len(high_arr) = {len(high_arr)}")
-      print(f"len(low_arr) = {len(low_arr)}")
-      print(f"low_Arr = {low_arr}")
-      print(f"l = {l} / merged_arr = {merged_arr}")
+      merged_arr.append(low_arr[l])
       l += 1
-      print(f"l = {l}")
-      print(f"h = {h}")
-      if l < len(low_arr):
-        print(f"next low turn = {low_arr[l]}")
-      else:
-        print("next low turn is None")
-      
     elif len(low_arr[l]) > len(high_arr[h]):
       merged_arr.append(high_arr[h])
-      print(f"....high_arr append....")
-      print(f"l = {l}")
-      print(f"h = {h}")
-      print(f"len(low_arr) = {len(low_arr)}")
-      print(f"len(high_arr) = {len(high_arr)}")
-      print(f"high_Arr = {high_arr}")
-      print(f"h = {h} / merged_arr = {merged_arr}")
       h += 1
-      print(f"l = {l}")
-      print(f"h = {h}")
-      if h < len(high_arr):
-        print(f"next high turn = {high_arr[h]}")
-      else:
-        print("next high turn is None")
-    else:
-      print(f".... high low arr append ....")
-      merged_arr.append(low_arr[h])
-      merged_arr.append(high_arr[h])
-      l += 1
-      h += 1
-  print("while Escape!!!")
+    else:  # 두 단어의 길이가 같은 경우
+      if low_arr[l] == high_arr[h]:  # 같은 단어일 경우
+        merged_arr.append(low_arr[l])
+        l += 1
+        h += 1
+      else:  # 다른 단어일 경우
+        if low_arr[l] < high_arr[h]:  #  low_arr이 사전순으로 앞 일 경우
+          merged_arr.append(low_arr[l])
+          l += 1
+        else: # low_arr이 사전순으로 뒤 일 경우
+          merged_arr.append(high_arr[h])
+          h += 1
+
   merged_arr += low_arr[l:]
   merged_arr += high_arr[h:]
-  print(merged_arr)
-  print()
   return merged_arr
+          
+        
 
 
-# ------------ main --------------
-stack = []
-n = int(sys.stdin.readline())
-for _ in range(n):
-  stack.append(sys.stdin.readline().rstrip())
+# --- main ---
 
-print(f"didnt merged : {stack}")
-print()
-print()
-print(merge_sort(stack))
+line = int(sys.stdin.readline())
+arr = []
+
+for _ in range(line):
+  arr.append(sys.stdin.readline().rstrip())
+
+for i in merge_sort(arr):
+  print(i)
