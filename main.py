@@ -1,49 +1,22 @@
 import sys
+import operator
 input = sys.stdin.readline
-from collections import deque
 
-N, p1, p2 = map(int,input().split())
+N = int(input())
 
-list = deque([])
-for i in range(1,N+1):
-  list.append(i)
-
-
-
-def chk(chk_target, p1 , p2):
-  if chk_target == p1:
-    return p1
-  elif chk_target == p2:
-    return p2
+dic = dict()
+for _ in range(N):
+  data = input().rstrip()
+  if data in dic:
+    dic[data] = dic[data] + 1
   else:
-    return 0
+    dic[data] = 1
 
-
-def dfs(lis,p1,p2,cnt):
-  cnt += 1
-  list = deque([])
-  while len(lis) > 0:
-    if len(lis) >= 2:
-      pn1 = lis.popleft()
-      pn2 = lis.popleft()
-
-      if pn1 in (p1,p2) or pn2 in (p1,p2):  # 임환수 김지민 있음
-        if pn1 in (p1,p2) and pn2 in (p1,p2):  # 임환수 김지민 둘 다 만남
-          print(cnt)
-          return 0
-        else:
-          list.append(max(chk(pn1,p1,p2), chk(pn2,p1,p2)))
-      else:   # 임화수와 김지민이 없음
-        list.append(pn2)
-        
-    else:  # 홀수 인 경우
-      list.append(lis.pop())
-  dfs(list,p1,p2,cnt)
-  return 0
-
-dfs(list,p1,p2,0)
-          
-        
-  
-
-  
+# 최대값 
+max_value = max(dic.values())
+list =[]
+for key, value in dic.items():
+  if value == max_value:
+    list.append(key)
+list.sort()
+print(list[0])
