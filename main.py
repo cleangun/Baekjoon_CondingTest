@@ -1,5 +1,7 @@
 import sys
+
 input = sys.stdin.readline
+
 
 def intCount(str):
   s = 0
@@ -7,6 +9,7 @@ def intCount(str):
     if arg.isdigit():
       s += int(arg)
   return s
+
 
 def merge_sort(arr):
   if len(arr) < 2:
@@ -44,12 +47,12 @@ def merge_sort(arr):
   merged_arr += high_arr[h:]
   return merged_arr
 
+
 N = int(input())
 
 sn = []
 for _ in range(N):
   sn.append(input().rstrip())
 
-print()
 for arg in merge_sort(sn):
   print(arg)
