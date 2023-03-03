@@ -1,35 +1,47 @@
-# 정사각형 문제
+# 수 이어 쓰기 - 1515 baekjoon
 import sys
-import math
 input = sys.stdin.readline
-sqrt = math.sqrt
-pow = math.pow
 
-# function
-def get_distance(ax1,ax2):
-  return ((ax1[0] - ax2[0]) ** 2 + (ax1[1] - ax2[1]) ** 2 ) ** (1/2)
+num_str = input().rstrip()
 
-# main
-N = int(input())
-for _ in range(N):
-  axisList = []
-  for _ in range(4):
-    axisList.append(list(map(int,input().split())))
-  
-  dist = []
-  for i in range(3):
-    for j in range(i+1,4):
-      dist.append(get_distance(axisList[i] , axisList[j]))
+numlist = []
+min = 0
+print(num_str)
 
-  dist.sort()
+def find_min(minum,chkNum):
+  frt_num = chkNum
+  back_num = chkNum*10
+  print(f"chkNum = {chkNum}")
+  print(f"back_num = {back_num}")
+  if frt_num <= minum:
+    tenCnt = 0
+    while 1:
+      if frt_num > minum:
+        if back_num < frt_num and back_num is not int(0):
+          print(f"back turn..!!")
+          temp = back_num
+          while temp <= minum:
+            temp += 1
+            if temp % 10 == 0:
+              return frt_num
+          return temp
+        else:
+          return frt_num
+      else:
+        frt_num += 10
+        tenCnt += 1
+        print(f"frt_num changed = {frt_num}")
 
-  if (dist[0] == dist[1]) and (dist[1] == dist[2]) and (dist[2] == dist[3]):
-    if dist[4] == dist[5]:
-      print(1)
-      continue
-    else:
-      print(0)
-      continue
+      if tenCnt % 10 == 0:
+        back_num *= 10
   else:
-    print(0)
-    continue
+    return frt_num
+  
+min = int(num_str[0])
+for ch in num_str[1:]:
+  print()
+  print(f"before min = {min}")
+  min = find_min(min,int(ch))
+  print(f"after min = {min}")
+
+print(min)
