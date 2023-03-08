@@ -1,35 +1,44 @@
-import sys
+# 프로그래머스 - 무인도 여행 (level 2)
+from collections import deque
 
-input = sys.stdin.readline
+maps = ["X591X", "X1X5X", "X231X", "1XXX1"]
 
-# function
-def marking(arr,x,y,N):
-  ori = [x,y]
-  if arr[y][x] == 0:
-    return arr
-  while (x < (N-1)) and (y < (N-1)):
-    x += 1
-    y += 1
-    arr[y][x] = 0
-  x,y = ori
-  while x > 0 and y < (N - 1):
-    x -= 1
-    y += 1
-    arr[y][x] = 0
-  return arr
 
-# Main
-N = int(input())
+def bfs(maps, arr, sum):
+  visit = deque([arr])
+  while visit:
+    x, y = visit.popleft()
+    if maps[y][x] == 'X':
+      continue
 
-grd = list([[1]*N for i in range(N)])
+    sum += int(maps[y][x])
+    maps[y][x] = 'X'
+    if (x + 1) < len(maps[0]):
+      if maps[y][x + 1] != 'X':
+        visit.append([x + 1, y])
+    if x - 1 >= 0:
+      if maps[y][x - 1] != 'X':
+        visit.append([x - 1, y])
+    if y + 1 < len(maps):
+      if maps[y + 1][x] != 'X':
+        visit.append([x, y + 1])
+    if y - 1 >= 0:
+      if maps[y - 1][x] != 'X':
+        visit.append([x, y - 1])
+  return sum
 
-for y in range(len(grd)):
-  for x in range(len(grd[y])):
-    grd = marking(grd,x,y,N)
 
-cnt = 0
-for i in grd:
-  print(i)
-  cnt += i.count(1)
+def solution(maps):
+  maps = [list(map(str, i)) for i in maps]
+  answer = []
+  for y in range(len(maps)):
+    for x in range(len(maps[y])):
+      if maps[y][x] == 'X':
+        continue
+      else:
+        answer.append(bfs(maps, [x, y], 0))
+  answer.sort()
+  return answer if answer else [-1]
 
-print(cnt)
+
+print(solution(maps))
