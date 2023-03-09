@@ -1,4 +1,6 @@
+# 스택 수열 - 1874 정석 ( but 시간초과 )
 import sys
+
 input = sys.stdin.readline
 
 N = int(input())
