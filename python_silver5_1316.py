@@ -8,21 +8,19 @@ for _ in range(N):
   nogroup = set()
   isNo = 0
   word = input().rstrip()
-  
+
   if len(word) == 1:  # 단어 한 개
     cnt += 1
     continue
-
+    
   before = word[0]
   for ch in word[1:]:
-    if ch == before:
-      continue
-    elif ch in nogroup:
+    if ch not in nogroup:
+      nogroup.add(before)
+    elif ch != before:
       isNo = 1
       break
-    else:  # 현재 단어가 전의 단어와 다르지만 나온적 없는 단어일때
-      nogroup.add(before)
     before = ch
-  cnt += 0 if isNo == 1 else 1
-  
+  if isNo != 1:
+    cnt += 1
 print(cnt)
