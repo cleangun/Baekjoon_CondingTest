@@ -1,11 +1,12 @@
 import sys
+
 input = sys.stdin.readline
 n = int(input())
 
 for _ in range(n):
   li = []
   cnt = 0
-  st, fi = map(int,input().split())
+  st, fi = map(int, input().split())
 
   plus = 1
   sep = 0
@@ -21,9 +22,3 @@ for _ in range(n):
       li.append(plus)
       plus += 1
   print(cnt)
-    
-      
-    
-  
-      
-  
