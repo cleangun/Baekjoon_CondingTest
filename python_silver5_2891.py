@@ -6,6 +6,7 @@ n, s, r = map(int, input().rstrip().split())
 
 teams = [1 for i in range(n)]
 
+# brute Force ? 그리디가 맞나;;;
 for lost_idx in list(map(int, input().rstrip().split())):
   teams[lost_idx - 1] -= 1
 for more_idx in list(map(int, input().rstrip().split())):
