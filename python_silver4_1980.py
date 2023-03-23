@@ -2,8 +2,10 @@
 
 result = []
 n, m, t = map(int,input().split())
+
 if t < n and t < m:
   print(f"0 {t}")
+  exit(0)   # 추가된 부분
 
 for coffee in range(0,t):
   pas = False
@@ -15,7 +17,6 @@ for coffee in range(0,t):
       pas = True
   if pas == True:
     break
-print(result)
 result.sort()
 cnt,cof = result.pop(-1)
 print(cnt,end=" "); print(cof)
