@@ -22,7 +22,7 @@ def find_more(full_num,last_num,numlist):
             small += max(numlist)
           else:
             small += max(numlist) * (10**i)
-      else:  # 큰수를 구할 차례
+      else:  # 큰 수를 구할 차례
         if i == (len(last_num)-1):
           while mid <= 9:
             if (mid > int(last_num[0])) and (mid in numlist):
@@ -50,6 +50,9 @@ if n != 0:
 if t == 100:
   print(0)
   exit(0)
+if len(numlist)==0:
+  print(first_cnt)
+  exit(0)
 
 combine = ""
 for idx in range(len(str(t))):
@@ -59,6 +62,6 @@ for idx in range(len(str(t))):
     last_num = str(t)[idx:]
     combine += str(find_more(t,last_num,numlist))
     break
-print(abs(t-int(combine)) + len(combine))
-    
+last_cnt = abs(t-int(combine)) + len(combine)
+print(last_cnt if last_cnt < first_cnt else first_cnt)
       
