@@ -1,26 +1,27 @@
-import sys - knapsack 문제
 
-input = sys.stdin.readline
+# import sys - knapsack 문제
 
-n, limit = map(int, input().split())
-kg_list = list(map(int, input().split()))
+# input = sys.stdin.readline
 
-cnt = 1
-dp = [[0] * (limit + 1) for i in range(n)]
+# n, limit = map(int, input().split())
+# kg_list = list(map(int, input().split()))
 
-def knapsack(kg_list, cnt, limit, sum):
-  if sum > limit:
-    return cnt
-  if sum <= limit and (len(kg_list) == 0):
-    cnt += 1
-    return cnt
+# cnt = 1
+# dp = [[0] * (limit + 1) for i in range(n)]
 
-  kg = kg_list[0]
-  cnt = knapsack(kg_list[1:], cnt, limit, sum + kg)
-  # print(f"if 1 cnt = {cnt}")
-  cnt = knapsack(kg_list[1:], cnt, limit, sum)
-  # print(f"if 0 cnt = {cnt}")
+# def knapsack(kg_list, cnt, limit, sum):
+#   if sum > limit:
+#     return cnt
+#   if sum <= limit and (len(kg_list) == 0):
+#     cnt += 1
+#     return cnt
 
-  return cnt
+#   kg = kg_list[0]
+#   cnt = knapsack(kg_list[1:], cnt, limit, sum + kg)
+#   # print(f"if 1 cnt = {cnt}")
+#   cnt = knapsack(kg_list[1:], cnt, limit, sum)
+#   # print(f"if 0 cnt = {cnt}")
 
-print(knapsack(kg_list, 0, limit, 0))
+#   return cnt
+
+# print(knapsack(kg_list, 0, limit, 0))
