@@ -1,25 +1,29 @@
 import sys
+from collections import deque
+import heapq as hq
+
+sys.setrecursionlimit(100000)
+
 input = sys.stdin.readline
 
-n,k = map(int,input().split())
-kit_lst = [int(num) for num in input().rstrip().split(" ")]    
+n, k = list(map(int, input().split()))
+arr = list(map(int, input().split()))
+
+visited = [False for _ in range(n)]
+ans = 0
 
 
-def dfs(idx, visited, val):
-    global cnt
-    if val + (kit_lst[idx] - k) < 500:
-        return
-    
-    if len(visited) == (n-1):
-        cnt += 1
-        return
-    b = (idx,)
-    new_visited = visited + b
-    for index in range(n):
-        if index not in list(new_visited):
-            dfs(index,new_visited,val + (kit_lst[idx] - k))
-    
-cnt = 0
-for start_idx in range(0,n):
-    dfs(start_idx, (), 500)
-print(cnt)
+def solve(weight):
+    global n, ans, k
+
+    if sum(visited) == n:
+        ans += 1
+
+    for i in range(n):
+        if not visited[i] and weight - k + arr[i] >= 500:
+            visited[i] = True
+            solve(weight - k + arr[i])
+            visited[i] = False
+
+solve(500)
+print(ans)
