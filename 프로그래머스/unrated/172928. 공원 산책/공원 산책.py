@@ -1,17 +1,13 @@
 def solution(park, routes):
-    answer = []
     graph = []
     for line in park:
         graph.append(list(line))
-    for i in graph:
-        print(i)
     
     visiting_node = []
     for y in range(len(graph)):
         if 'S' in graph[y]:
             visiting_node = [y, graph[y].index('S')]
             break
-    print(visiting_node)
     
     for route in routes:
         direction, distance = route.split(); distance = int(distance)
@@ -33,9 +29,7 @@ def solution(park, routes):
                 isOk = False
                 break
         if isOk:
-            visiting_node = [next_node[0], next_node[1]]        
-        print(visiting_node)
-        
+            visiting_node = [next_node[0], next_node[1]]    
     answer = [visiting_node[0], visiting_node[1]]
 
     return answer
