@@ -1,15 +1,10 @@
 class Solution {
     public String solution(int[] food) {
-        String answer = "";
-        for (int index = 1; index < food.length; index++){
-            if (food[index] % 2 == 1){
-                food[index] -= 1;
+        String answer = "0";
+        for (int i = food.length - 1; i >= 1; i--){
+            for (int j = 0; j < food[i] / 2; j++){
+                answer = i + answer + i;
             }
-            answer += String.valueOf(index).repeat(food[index] / 2);
-        }
-        answer += '0';
-        for (int idx = answer.length() -2; idx >= 0 ; idx--){
-            answer += answer.charAt(idx);
         }
         return answer;
     }
